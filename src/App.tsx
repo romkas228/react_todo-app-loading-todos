@@ -26,9 +26,12 @@ export const App: React.FC = () => {
       .catch(() => setError('Unable to load todos'))
       .finally(() => {
         setIsLoading(false);
-        setTimeout(() => setError(null), 3000);
       });
   }, []);
+
+  useEffect(() => {
+    setTimeout(() => setError(null), 3000);
+  }, [error]);
 
   const filteredTodos = useMemo(
     () =>
