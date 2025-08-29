@@ -30,7 +30,15 @@ export const App: React.FC = () => {
   }, []);
 
   useEffect(() => {
-    setTimeout(() => setError(null), 3000);
+    let timeoutId: number;
+
+    if (error?.length) {
+      timeoutId = window.setTimeout(() => setError(null), 3000);
+    }
+
+    return () => {
+      clearTimeout(timeoutId);
+    };
   }, [error]);
 
   const filteredTodos = useMemo(
